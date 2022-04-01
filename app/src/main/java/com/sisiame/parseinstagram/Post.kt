@@ -4,6 +4,7 @@ import com.parse.ParseClassName
 import com.parse.ParseFile
 import com.parse.ParseObject
 import com.parse.ParseUser
+import java.util.*
 
 
 // description : String
@@ -40,6 +41,7 @@ class Post : ParseObject() {
         const val KEY_DESC = "description"
         const val KEY_IMG = "image"
         const val KEY_USR = "user"
+        const val KEY_CA = "createdAt"
     }
 
 }
