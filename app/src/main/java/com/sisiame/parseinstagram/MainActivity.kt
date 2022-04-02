@@ -1,30 +1,21 @@
 package com.sisiame.parseinstagram
 
 import android.content.Intent
-import android.graphics.BitmapFactory
-import android.graphics.PorterDuff
-import android.net.Uri
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.Environment
-import android.provider.MediaStore
-import android.util.Log
-import android.widget.Button
-import android.widget.EditText
 import android.widget.ImageView
-import android.widget.Toast
 import androidx.annotation.RequiresApi
-import androidx.core.content.FileProvider
 import androidx.fragment.app.Fragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.parse.*
 import com.sisiame.parseinstagram.fragment.ComposeFragment
 import com.sisiame.parseinstagram.fragment.FeedFragment
 import com.sisiame.parseinstagram.fragment.ProfileFragment
-import java.io.File
 
 class MainActivity : AppCompatActivity() {
+
+    private lateinit var bottomNav: BottomNavigationView
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -35,7 +26,7 @@ class MainActivity : AppCompatActivity() {
             signOut()
         }
 
-        val bottomNav = findViewById<BottomNavigationView>(R.id.bottom_navigation)
+        bottomNav = findViewById(R.id.bottom_navigation)
 
         bottomNav.setOnItemSelectedListener {
 
@@ -72,6 +63,7 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+
     private fun signOut() {
 
         ParseUser.logOutInBackground {
@@ -87,6 +79,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     companion object {
+
         const val TAG = "MainActivity"
         const val CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 1034
     }

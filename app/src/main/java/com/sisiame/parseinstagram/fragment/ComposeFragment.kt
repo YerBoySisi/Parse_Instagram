@@ -17,13 +17,13 @@ import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.FileProvider
+import androidx.fragment.app.FragmentManager
 import com.parse.ParseFile
 import com.parse.ParseUser
 import com.sisiame.parseinstagram.MainActivity
 import com.sisiame.parseinstagram.Post
 import com.sisiame.parseinstagram.R
 import java.io.File
-import java.util.*
 
 class ComposeFragment : Fragment() {
 
@@ -64,23 +64,6 @@ class ComposeFragment : Fragment() {
         
     }
 
-    // Returns the File for a photo stored on disk given the fileName
-    private fun getPhotoFileUri(fileName: String): File {
-        // Get safe storage directory for photos
-        // Use `getExternalFilesDir` on Context to access package-specific directories.
-        // This way, we don't need to request external read/write runtime permissions.
-        val mediaStorageDir =
-            File(requireContext().getExternalFilesDir(Environment.DIRECTORY_PICTURES), MainActivity.TAG)
-
-        // Create the storage directory if it does not exist
-        if (!mediaStorageDir.exists() && !mediaStorageDir.mkdirs()) {
-            Log.d(MainActivity.TAG, "failed to create directory")
-        }
-
-        // Return the file target for the photo based on filename
-        return File(mediaStorageDir.path + File.separator + fileName)
-    }
-
     private fun submitPost(desc: String, user: ParseUser, file: File) {
 
         val post = Post()
@@ -96,10 +79,38 @@ class ComposeFragment : Fragment() {
             } else {
                 Log.i(TAG, "Successfully saved post")
                 Toast.makeText(requireContext(), "Saved post", Toast.LENGTH_SHORT).show()
+                goToFeed()
             }
 
         }
 
+    }
+
+    fun goToFeed() {
+
+        requireActivity()
+            .supportFragmentManager
+            .beginTransaction()
+            .replace(R.id.frag_container, FeedFragment())
+            .commit()
+
+    }
+
+    // Returns the File for a photo stored on disk given the fileName
+    private fun getPhotoFileUri(fileName: String): File {
+        // Get safe storage directory for photos
+        // Use `getExternalFilesDir` on Context to access package-specific directories.
+        // This way, we don't need to request external read/write runtime permissions.
+        val mediaStorageDir =
+            File(requireContext().getExternalFilesDir(Environment.DIRECTORY_PICTURES), MainActivity.TAG)
+
+        // Create the storage directory if it does not exist
+        if (!mediaStorageDir.exists() && !mediaStorageDir.mkdirs()) {
+            Log.d(MainActivity.TAG, "failed to create directory")
+        }
+
+        // Return the file target for the photo based on filename
+        return File(mediaStorageDir.path + File.separator + fileName)
     }
 
     private fun onLaunchCamera() {
