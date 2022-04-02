@@ -40,6 +40,7 @@ class PostAdapter(private val context: Context, private val posts: ArrayList<Pos
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
+        private val ivProfileImage: ImageView = itemView.findViewById(R.id.profile_picture)
         private val tvUsernameHead: TextView = itemView.findViewById(R.id.user_head)
         private val tvUsername: TextView = itemView.findViewById(R.id.user)
         private val ivImage: ImageView = itemView.findViewById(R.id.picture)
@@ -52,6 +53,7 @@ class PostAdapter(private val context: Context, private val posts: ArrayList<Pos
             tvUsername.text = tvUsernameHead.text
             tvCreatedAt.text = post.createdAt.toString()
 
+            Glide.with(itemView.context).load(post.getProfileImage()?.url).into(ivProfileImage)
             Glide.with(itemView.context).load(post.getImage()?.url).into(ivImage)
         }
 
