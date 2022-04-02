@@ -12,12 +12,12 @@ import com.bumptech.glide.Glide
 class PostAdapter(private val context: Context, private val posts: ArrayList<Post>):
     RecyclerView.Adapter<PostAdapter.ViewHolder>() {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PostAdapter.ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(context).inflate(R.layout.item_post, parent, false)
         return ViewHolder(view)
     }
 
-    override fun onBindViewHolder(holder: PostAdapter.ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val post = posts[position]
         holder.bind(post)
     }

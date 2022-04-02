@@ -31,6 +31,10 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        findViewById<ImageView>(R.id.sign_out).setOnClickListener {
+            signOut()
+        }
+
         val bottomNav = findViewById<BottomNavigationView>(R.id.bottom_navigation)
 
         bottomNav.setOnItemSelectedListener {
@@ -66,6 +70,20 @@ class MainActivity : AppCompatActivity() {
 
         bottomNav.selectedItemId = R.id.action_home
 
+    }
+
+    private fun signOut() {
+
+        ParseUser.logOutInBackground {
+            goToLoginActivity()
+        }
+
+    }
+
+    private fun goToLoginActivity() {
+        val intent = Intent(this@MainActivity, LoginActivity::class.java)
+        startActivity(intent)
+        finish()
     }
 
     companion object {
