@@ -27,7 +27,7 @@ import java.util.*
 
 class ComposeFragment : Fragment() {
 
-    private val photoFileName = "photo.jpg"
+    private var photoFileName = "photo.jpg"
     private var photoFile: File? = null
 
     private lateinit var ivPreview: ImageView
@@ -90,11 +90,11 @@ class ComposeFragment : Fragment() {
         post.saveInBackground { e ->
 
             if(e != null) {
-                Log.e(MainActivity.TAG, "Error while saving post")
+                Log.e(TAG, "Error while saving post: $e")
                 Toast.makeText(requireContext(), "Error while saving post", Toast.LENGTH_SHORT).show()
                 e.printStackTrace()
             } else {
-                Log.i(MainActivity.TAG, "Successfully saved post")
+                Log.i(TAG, "Successfully saved post")
                 Toast.makeText(requireContext(), "Saved post", Toast.LENGTH_SHORT).show()
             }
 
@@ -115,6 +115,8 @@ class ComposeFragment : Fragment() {
             val fileProvider: Uri =
                 FileProvider.getUriForFile(requireContext(), "com.codepath.fileprovider.parseinstagram", photoFile!!)
             intent.putExtra(MediaStore.EXTRA_OUTPUT, fileProvider)
+
+            photoFileName = photoFile!!.name
 
             // If you call startActivityForResult() using an intent that no app can handle, your app will crash.
             // So as long as the result is not null, it's safe to use the intent.
@@ -141,6 +143,10 @@ class ComposeFragment : Fragment() {
                 Toast.makeText(requireContext(), "Picture wasn't taken!", Toast.LENGTH_SHORT).show()
             }
         }
+    }
+
+    companion object {
+        const val TAG = "ComposeFragment"
     }
 
 }
