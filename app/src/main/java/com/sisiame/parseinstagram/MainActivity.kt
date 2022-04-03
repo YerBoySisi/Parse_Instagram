@@ -1,11 +1,14 @@
 package com.sisiame.parseinstagram
 
 import android.content.Intent
+import android.graphics.PorterDuff
+import android.net.Uri
 import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.widget.ImageView
 import androidx.annotation.RequiresApi
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.parse.*
@@ -22,8 +25,13 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        findViewById<ImageView>(R.id.sign_out).setOnClickListener {
-            signOut()
+        findViewById<ImageView>(R.id.github_link).setOnClickListener {
+            startActivity(
+                Intent(
+                    Intent.ACTION_VIEW,
+                    Uri.parse("https://github.com/YerBoySisi/Parse_Instagram")
+                )
+            )
         }
 
         bottomNav = findViewById(R.id.bottom_navigation)
@@ -32,28 +40,42 @@ class MainActivity : AppCompatActivity() {
 
             item ->
 
-            lateinit var fragmentToShow: Fragment
+                lateinit var fragmentToShow: Fragment
 
-            when(item.itemId) {
+                when(item.itemId) {
 
-                R.id.action_home -> {
-                    fragmentToShow = FeedFragment()
+                    R.id.action_home -> {
+                        fragmentToShow = FeedFragment()
+
+                        supportFragmentManager
+                            .beginTransaction()
+                            .replace(R.id.frag_container, fragmentToShow)
+                            .commit()
+                    }
+
+                    R.id.action_compose -> {
+                        fragmentToShow = ComposeFragment()
+
+                        supportFragmentManager
+                            .beginTransaction()
+                            .replace(R.id.frag_container, fragmentToShow)
+                            .commit()
+                    }
+
+                    R.id.action_profile -> {
+                        fragmentToShow = ProfileFragment()
+
+                        supportFragmentManager
+                            .beginTransaction()
+                            .replace(R.id.frag_container, fragmentToShow)
+                            .commit()
+                    }
+
+                    R.id.action_signout -> {
+                        signOut()
+                    }
+
                 }
-
-                R.id.action_compose -> {
-                    fragmentToShow = ComposeFragment()
-                }
-
-                R.id.action_profile -> {
-                    fragmentToShow = ProfileFragment()
-                }
-
-            }
-
-            supportFragmentManager
-                .beginTransaction()
-                .replace(R.id.frag_container, fragmentToShow)
-                .commit()
 
             true
 

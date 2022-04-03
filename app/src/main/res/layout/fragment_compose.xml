@@ -5,46 +5,137 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="com.sisiame.parseinstagram.fragment.ComposeFragment">
 
-    <EditText
-        android:id="@+id/field_desc"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="Description"
-        android:inputType="textPersonName"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layout_caption"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:context="com.sisiame.parseinstagram.fragment.ComposeFragment">
 
-    <Button
-        android:id="@+id/btn_takephoto"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:text="TAKE PHOTO"
+        <Button
+            android:id="@+id/btn_retakephoto"
+            style="@style/Widget.AppCompat.Button.Colored"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimary"
+            android:fontFamily="@font/roboto"
+            android:paddingTop="30dp"
+            android:paddingBottom="30dp"
+            android:text="RETAKE PHOTO"
+            android:textColor="@color/cardview_light_background"
+            android:textColorHighlight="#FFFFFF"
+            android:textColorLink="#FFFFFF"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/field_desc" />
+
+        <EditText
+            android:id="@+id/field_desc"
+            android:layout_width="0dp"
+            android:layout_height="300dp"
+            android:background="#FFFFFF"
+            android:ems="10"
+            android:fontFamily="@font/roboto"
+            android:gravity="top"
+            android:hint="Tell us a little about your photo..."
+            android:inputType="textMultiLine"
+            android:maxLength="1000"
+            android:padding="5dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/btn_submit"
+            style="@style/Widget.AppCompat.Button.Colored"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:backgroundTint="@color/colorAccent"
+            android:fontFamily="@font/roboto"
+            android:paddingTop="30dp"
+            android:paddingBottom="30dp"
+            android:text="CREATE POST"
+            android:textColor="@color/cardview_light_background"
+            android:textColorHighlight="#FFFFFF"
+            android:textColorLink="#FFFFFF"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btn_retakephoto" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layout_photo"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/field_desc" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:context="com.sisiame.parseinstagram.fragment.ComposeFragment">
 
-    <ImageView
-        android:id="@+id/img_preview"
-        android:layout_width="0dp"
-        android:layout_height="410dp"
-        android:layout_marginTop="32dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_takephoto"
-        tools:srcCompat="@tools:sample/avatars" />
+        <ImageView
+            android:id="@+id/img_preview_placeholder"
+            android:layout_width="0dp"
+            android:layout_height="450dp"
+            android:background="#D5D5D5"
+            android:padding="125dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_baseline_insert_photo_24" />
 
-    <Button
-        android:id="@+id/btn_submit"
-        style="@style/Widget.AppCompat.Button.Colored"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:text="SUBMIT"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/img_preview" />
+        <ImageView
+            android:id="@+id/img_preview"
+            android:layout_width="450dp"
+            android:layout_height="420dp"
+            android:rotation="90"
+            android:scaleType="centerCrop"
+            app:layout_constraintBottom_toBottomOf="@+id/img_preview_placeholder"
+            app:layout_constraintEnd_toEndOf="@+id/img_preview_placeholder"
+            app:layout_constraintStart_toStartOf="@+id/img_preview_placeholder"
+            app:layout_constraintTop_toTopOf="@+id/img_preview_placeholder" />
 
+        <Button
+            android:id="@+id/btn_takephoto"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimary"
+            android:fontFamily="@font/roboto"
+            android:padding="30dp"
+            android:text="TAKE PHOTO"
+            android:textColor="@color/cardview_light_background"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/img_preview_placeholder" />
+
+        <Button
+            android:id="@+id/btn_createcaption"
+            style="@style/Widget.AppCompat.Button.Colored"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:backgroundTint="@color/colorAccent"
+            android:fontFamily="@font/roboto"
+            android:paddingTop="30dp"
+            android:paddingBottom="30dp"
+            android:text="CREATE CAPTION"
+            android:textColor="@color/cardview_light_background"
+            android:textColorHighlight="#FFFFFF"
+            android:textColorLink="#FFFFFF"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btn_takephoto" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

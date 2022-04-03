@@ -10,7 +10,7 @@
         android:id="@+id/title_bg"
         android:layout_width="0dp"
         android:layout_height="70dp"
-        android:background="@color/design_default_color_primary_dark"
+        android:background="@color/colorPrimary"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -18,14 +18,15 @@
     </FrameLayout>
 
     <ImageView
-        android:id="@+id/sign_out"
-        android:layout_width="30dp"
+        android:id="@+id/github_link"
+        android:layout_width="40dp"
         android:layout_height="0dp"
         android:layout_marginEnd="8dp"
+        android:tint="@color/cardview_light_background"
         app:layout_constraintBottom_toBottomOf="@+id/title"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/title"
-        app:srcCompat="@drawable/ic_baseline_exit_to_app_24" />
+        app:srcCompat="@drawable/githublogo" />
 
     <TextView
         android:id="@+id/title"
@@ -35,11 +36,11 @@
         android:fontFamily="cursive"
         android:text="Parsetagram"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        android:textColor="#F3F3F3"
+        android:textColor="@color/cardview_light_background"
         android:textSize="30sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/title_bg"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/title_bg"
         app:layout_constraintTop_toTopOf="parent" />
 
     <FrameLayout
@@ -48,8 +49,10 @@
         android:layout_height="0dp"
         app:layout_constraintBottom_toTopOf="@+id/bottom_navigation"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/title_bg">
+        app:layout_constraintTop_toBottomOf="@+id/title_bg"
+        app:layout_constraintVertical_bias="0.0">
 
     </FrameLayout>
 
@@ -57,11 +60,14 @@
         android:id="@+id/bottom_navigation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:itemBackground="@color/cardview_light_background"
+        app:itemBackground="@color/colorPrimary"
+        app:itemIconSize="30dp"
+        app:itemIconTint="@color/menu_item_color_state"
+        app:labelVisibilityMode="unlabeled"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:menu="@menu/menu_bottom_navigation" >
+        app:menu="@menu/menu_bottom_navigation">
 
     </com.google.android.material.bottomnavigation.BottomNavigationView>
 

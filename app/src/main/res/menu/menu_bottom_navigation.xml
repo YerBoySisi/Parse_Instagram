@@ -9,12 +9,17 @@
         app:showAsAction="ifRoom" />
     <item
         android:id="@+id/action_compose"
-        android:icon="@drawable/ic_baseline_edit_24"
+        android:icon="@drawable/ic_baseline_add_circle_outline_24"
         android:title="Compose"
         app:showAsAction="ifRoom" />
     <item
         android:id="@+id/action_profile"
         android:icon="@drawable/ic_baseline_person_24"
         android:title="Profile"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/action_signout"
+        android:icon="@drawable/ic_baseline_exit_to_app_24"
+        android:title="Sign Out"
         app:showAsAction="ifRoom" />
 </menu>

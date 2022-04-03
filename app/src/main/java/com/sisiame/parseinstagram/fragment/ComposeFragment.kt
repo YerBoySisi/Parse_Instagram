@@ -3,9 +3,11 @@ package com.sisiame.parseinstagram.fragment
 import android.content.Intent
 import android.graphics.BitmapFactory
 import android.net.Uri
+import android.opengl.Visibility
 import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
+import android.text.Layout
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -16,6 +18,7 @@ import android.widget.EditText
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.constraintlayout.widget.ConstraintSet.GONE
 import androidx.core.content.FileProvider
 import androidx.fragment.app.FragmentManager
 import com.parse.ParseFile
@@ -43,6 +46,8 @@ class ComposeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        showPhotoScreen(view)
+
         ivPreview = view.findViewById(R.id.img_preview)
 
         view.findViewById<Button>(R.id.btn_submit).setOnClickListener {
@@ -61,13 +66,47 @@ class ComposeFragment : Fragment() {
         view.findViewById<Button>(R.id.btn_takephoto).setOnClickListener {
             onLaunchCamera()
         }
+
+        view.findViewById<Button>(R.id.btn_createcaption).setOnClickListener {
+            showCaptionScreen(view)
+        }
+
+        view.findViewById<Button>(R.id.btn_retakephoto).setOnClickListener {
+            showPhotoScreen(view)
+        }
         
+    }
+
+    /**
+     * Shows screen for taking photo and hides screen for creating caption
+     * @param view the view parameter from onViewCreated
+     */
+    private fun showPhotoScreen(view: View) {
+        view.findViewById<View>(R.id.layout_photo).visibility = View.VISIBLE
+        view.findViewById<View>(R.id.layout_caption).visibility = View.GONE
+    }
+
+
+    /**
+     * Shows screen for creating caption and hides screen for taking photo if
+     * a photo has been taken, otherwise displays a message to take a photo
+     * @param view the view parameter from onViewCreated
+     */
+    private fun showCaptionScreen(view: View) {
+
+        if(photoFile != null) {
+            view.findViewById<View>(R.id.layout_photo).visibility = View.GONE
+            view.findViewById<View>(R.id.layout_caption).visibility = View.VISIBLE
+        } else {
+            Toast.makeText(requireContext(), "Take a photo first!", Toast.LENGTH_SHORT).show()
+        }
+
     }
 
     private fun submitPost(desc: String, user: ParseUser, file: File) {
 
         val post = Post()
-        post.setDescription(desc)
+        post.setDescription(desc.trim())
         post.fetchIfNeeded<Post>().setUser(user)
         post.setImage(ParseFile(file))
         post.saveInBackground { e ->
@@ -86,7 +125,7 @@ class ComposeFragment : Fragment() {
 
     }
 
-    fun goToFeed() {
+    private fun goToFeed() {
 
         requireActivity()
             .supportFragmentManager
