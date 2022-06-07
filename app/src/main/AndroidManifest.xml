@@ -46,7 +46,8 @@
                 android:resource="@xml/fileprovider" />
         </provider>
 
-        <activity android:name="com.sisiame.parseinstagram.LoginActivity">
+        <activity android:name="com.sisiame.parseinstagram.LoginActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
